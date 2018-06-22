@@ -30,6 +30,8 @@ import java.util.regex.*;
  * JLogTailer - A log tailer utility written in Java.
  * Copyright Paul James Mutton, 2002.
  * 
+ * Enhancements (C)2018 Alex T. Ramos
+ * 
  * @author Paul James Mutton, http://www.jibble.org/
  * @version 2.0
  */
@@ -73,6 +75,16 @@ public class JLogTailerInternalFrame extends JInternalFrame implements Runnable,
         fileMenu.add(fileCloseItem);
         JMenuItem highlightingOptionsItem = new JMenuItem("Highlighting options");
         highlightingMenu.add(highlightingOptionsItem);
+        
+        JMenuItem clearItem = new JMenuItem("Clear");
+        menuBar.add(clearItem);
+        clearItem.addActionListener(event -> {
+			try {
+				_asta.getDocument().remove(0, _asta.getDocument().getLength());
+			} catch (BadLocationException e) {
+				throw new RuntimeException(e);
+			}
+		});
         
         this.setJMenuBar(menuBar);
         
@@ -204,7 +216,7 @@ public class JLogTailerInternalFrame extends JInternalFrame implements Runnable,
     }
     
     // Maximum number of lines that we shall display before removing earlier ones.
-    private int _maxLines = 500;
+    private int _maxLines = 1000000;
     private int _linesShown = 0;
     
     private boolean _running = true;
