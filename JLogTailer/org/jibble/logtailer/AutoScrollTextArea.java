@@ -25,16 +25,24 @@ import java.awt.event.*;
  * JLogTailer - A log tailer utility written in Java.
  * Copyright Paul James Mutton, 2002.
  * 
+ * Enhancements (C) Alex T. Ramos, 2018.
+ * 
  * @author Paul James Mutton, http://www.jibble.org/
  * @version 2.0
  */
 public class AutoScrollTextArea extends JScrollPane {
     
-    public AutoScrollTextArea() {
+    private static final int DEFAULT_FONT_SIZE = 16;
+    
+	public AutoScrollTextArea() {
         super();
         _textPane.setEditable(false);
-        _textPane.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        this.setFontSize(DEFAULT_FONT_SIZE);
         this.setViewportView(_textPane);
+    }
+    
+    public void setFontSize(int size) {
+    	_textPane.setFont(new Font("Monospaced", Font.PLAIN, size));
     }
     
     private void scrollToBottom() {

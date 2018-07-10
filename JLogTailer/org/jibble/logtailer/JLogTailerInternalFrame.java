@@ -76,6 +76,17 @@ public class JLogTailerInternalFrame extends JInternalFrame implements Runnable,
         JMenuItem highlightingOptionsItem = new JMenuItem("Highlighting options");
         highlightingMenu.add(highlightingOptionsItem);
         
+        JMenu fontMenu = new JMenu("Font");
+        menuBar.add(fontMenu);
+        for(int i=6; i <= 32; ++i) {
+        	JMenuItem option = new JMenuItem(i + " pt");
+        	final int fontSize = i;
+        	option.addActionListener(event -> {
+        		_asta.setFontSize(fontSize);
+        	});
+        	fontMenu.add(option);
+        }
+        
         JMenuItem clearItem = new JMenuItem("Clear");
         menuBar.add(clearItem);
         clearItem.addActionListener(event -> {
